@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="SaaS Ops Tune-Up: AI that cleans GitHub, Slack, and email handoffs for founder-led SaaS — audits and focused automation.">
+  <title>SaaS Ops Tune-Up — AI that cleans GitHub, Slack &amp; email handoffs</title>
+  <style>
+:root {
+  --ink: #16211d;
+  --muted: #5e6b65;
+  --line: #d7dfda;
+  --paper: #f6f8f4;
+  --soft: #e8eee8;
+  --accent: #c8f169;
+  --accent-deep: #94b83d;
+  --dark: #16211d;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--paper);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; }
+.wrap { width: min(1120px, calc(100% - 48px)); margin: 0 auto; }
+.site-header {
+  width: min(1240px, calc(100% - 48px));
+  margin: 0 auto;
+  padding: 28px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+.wordmark { font-weight: 750; letter-spacing: -.03em; text-decoration: none; }
+.header-link { color: var(--muted); font-size: .88rem; text-decoration: none; }
+.header-link:hover, .digest-link:hover { color: var(--ink); }
+.header-link span { color: var(--ink); margin-left: 5px; }
+.hero { padding: clamp(72px, 12vw, 150px) 0 clamp(90px, 13vw, 150px); }
+.eyebrow {
+  margin: 0 0 22px;
+  color: var(--muted);
+  font-size: .72rem;
+  font-weight: 750;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
+h1, h2, h3 { margin: 0; letter-spacing: -.055em; line-height: 1.02; }
+h1 { max-width: 840px; font-size: clamp(3.2rem, 8vw, 7.2rem); font-weight: 760; }
+h1 em { color: var(--accent-deep); font-style: normal; }
+h2 { font-size: clamp(2.2rem, 5vw, 4.4rem); }
+h3 { font-size: 1.7rem; }
+.lede { max-width: 620px; margin: 36px 0 32px; color: var(--muted); font-size: clamp(1.05rem, 2vw, 1.3rem); }
+.button {
+  display: inline-flex;
+  align-items: center;
+  gap: 22px;
+  padding: 15px 19px 15px 21px;
+  color: var(--ink);
+  background: var(--accent);
+  border: 1px solid var(--accent);
+  font-size: .9rem;
+  font-weight: 750;
+  text-decoration: none;
+  transition: transform .18s ease, background .18s ease;
+}
+.button:hover { background: #d5f78d; transform: translateY(-2px); }
+.button span { font-size: 1.2rem; line-height: 1; }
+.microcopy { margin: 13px 0 0; color: var(--muted); font-size: .78rem; }
+.section { padding: clamp(76px, 11vw, 132px) 0; }
+.section-muted { background: var(--soft); }
+.two-col, .demo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(45px, 9vw, 140px); align-items: start; }
+.section-copy { max-width: 480px; color: var(--muted); font-size: 1.03rem; }
+.section-copy p { margin: 0 0 20px; }
+.offer-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 48px; }
+.offer-card { min-height: 340px; padding: 25px; border: 1px solid var(--line); display: flex; flex-direction: column; }
+.offer-card-featured { background: var(--accent); border-color: var(--accent); }
+.offer-number { margin: 0 0 64px; color: var(--muted); font-size: .76rem; font-weight: 750; }
+.offer-card h3 { margin-bottom: 15px; }
+.offer-card > p:not(.offer-number):not(.price) { margin: 0; color: var(--muted); font-size: .92rem; }
+.offer-card-featured > p:not(.offer-number):not(.price) { color: var(--ink); }
+.price { margin: auto 0 0; font-size: 1.08rem; line-height: 1.45; }
+.price strong { font-size: 1.18rem; }
+.price span { color: var(--muted); font-size: .76rem; }
+.fine-print { max-width: 680px; margin: 25px 0 0; color: var(--muted); font-size: .82rem; }
+.demo-section { color: var(--ink); background: #dce7dd; }
+.demo-grid { align-items: center; }
+.demo-section .section-copy { margin-top: 27px; }
+.digest { overflow: hidden; border: 1px solid #bdcabe; background: var(--paper); box-shadow: 12px 12px 0 rgba(22, 33, 29, .08); }
+.digest-top { padding: 14px 17px; color: var(--muted); border-bottom: 1px solid var(--line); font-size: .78rem; font-weight: 700; }
+.status-dot { display: inline-block; width: 8px; height: 8px; margin-right: 7px; border-radius: 50%; background: #5a9d5b; }
+.digest-time { float: right; font-weight: 400; }
+.digest-body { padding: 25px; }
+.digest-body strong { font-size: 1.1rem; }
+.digest-body ul { margin: 18px 0; padding-left: 20px; color: var(--muted); font-size: .9rem; }
+.digest-body li + li { margin-top: 7px; }
+.digest-link { color: var(--muted); font-size: .82rem; font-weight: 750; text-decoration: underline; text-underline-offset: 3px; }
+.cta-section { padding-bottom: 95px; }
+.cta { padding: clamp(38px, 7vw, 72px); background: var(--accent); }
+.cta h2 { max-width: 650px; }
+.cta > p:not(.eyebrow):not(.microcopy) { max-width: 490px; margin: 25px 0 28px; color: #42503a; }
+.button-dark { color: var(--paper); background: var(--dark); border-color: var(--dark); }
+.button-dark:hover { background: #293b33; }
+.site-footer { padding: 28px 0 38px; color: var(--muted); border-top: 1px solid var(--line); display: flex; justify-content: space-between; gap: 24px; font-size: .75rem; }
+@media (max-width: 700px) {
+  .wrap, .site-header { width: min(100% - 36px, 1120px); }
+  .site-header { padding: 21px 0; }
+  .header-link { font-size: .76rem; }
+  .hero { padding-top: 78px; }
+  h1 { font-size: clamp(3.05rem, 15vw, 5.3rem); }
+  .two-col, .demo-grid, .offer-grid { grid-template-columns: 1fr; }
+  .two-col, .demo-grid { gap: 30px; }
+  .offer-grid { gap: 12px; margin-top: 34px; }
+  .offer-card { min-height: 285px; }
+  .offer-number { margin-bottom: 42px; }
+  .cta-section { padding-bottom: 65px; }
+  .cta { padding: 36px 25px; }
+  .site-footer { align-items: flex-start; flex-direction: column; gap: 8px; }
+}
+
+
+.demo-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 40px; }
+.demo-card { padding: 22px 24px; border: 1px solid var(--line); background: var(--paper); min-height: 200px; display: flex; flex-direction: column; }
+.demo-card h3 { font-size: 1.25rem; margin-bottom: 12px; }
+.demo-card p { margin: 0 0 18px; color: var(--muted); font-size: .92rem; flex: 1; }
+.demo-card a { font-size: .88rem; font-weight: 750; text-decoration: underline; text-underline-offset: 3px; color: var(--ink); }
+.score-band { margin-top: 28px; padding: 28px 30px; border: 1px solid var(--line); background: var(--paper); display: flex; flex-wrap: wrap; gap: 24px; align-items: center; justify-content: space-between; }
+.score-band p { margin: 0; max-width: 520px; color: var(--muted); }
+.footer-stack { display: flex; flex-direction: column; gap: 4px; }
+.footer-addr { color: var(--muted); }
+@media (max-width: 700px) {
+  .demo-cards { grid-template-columns: 1fr; }
+  .score-band { flex-direction: column; align-items: flex-start; }
+}
+
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <a class="wordmark" href="#top" aria-label="SaaS Ops Tune-Up home">SaaS Ops Tune-Up</a>
+    <a class="header-link" href="mailto:saasops@agentmail.to">Start a conversation <span aria-hidden="true">↗</span></a>
+  </header>
+
+  <main id="top">
+    <section class="hero wrap">
+      <p class="eyebrow">AI that cleans the handoffs — not another chatbot</p>
+      <h1>GitHub, Slack, and email —<br><em>without the glue work on you.</em></h1>
+      <p class="lede">I help founder-led SaaS teams with AI/ops that cleans messy handoffs across the tools you already use. One painful workflow at a time. Human judgment stays where it belongs.</p>
+      <a class="button" href="mailto:saasops@agentmail.to?subject=SaaS%20Ops%20Tune-Up">Talk through a workflow <span aria-hidden="true">→</span></a>
+      <p class="microcopy">15-minute fit check · saasops@agentmail.to</p>
+    </section>
+
+    <section class="section section-muted">
+      <div class="wrap two-col">
+        <div>
+          <p class="eyebrow">Who it’s for</p>
+          <h2>Founder-led SaaS, real workarounds.</h2>
+        </div>
+        <div class="section-copy">
+          <p>Best fit: a working product, a small team, and recurring drag in releases, support triage, or internal updates.</p>
+          <p>Not aimed at AI-agent companies or six-month transformation programs. We don’t replace your core systems — we clean the handoffs.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section wrap" id="automations">
+      <p class="eyebrow">What we clean up</p>
+      <h2>Three handoffs worth fixing first.</h2>
+      <div class="offer-grid">
+        <article class="offer-card">
+          <p class="offer-number">01</p>
+          <h3>Release digest</h3>
+          <p>Tag a release → facts-only Features / Fixes / Chores in Slack (authors + links). Human reviews, then posts.</p>
+        </article>
+        <article class="offer-card">
+          <p class="offer-number">02</p>
+          <h3>Triage routing</h3>
+          <p>Inbound support mail or Slack → rules-based category/priority → GitHub issue draft + Slack summary. Approve / edit / reject before anything is filed.</p>
+        </article>
+        <article class="offer-card">
+          <p class="offer-number">03</p>
+          <h3>Reply drafts</h3>
+          <p>Inbound sales or support email → short founder-voice draft, held for approval. Never auto-send. Guardrails block invented prices and dates.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section wrap" id="offer">
+      <p class="eyebrow">The ladder</p>
+      <h2 style="margin-bottom:0">Audit → build → optional retainer.</h2>
+      <div class="offer-grid">
+        <article class="offer-card">
+          <p class="offer-number">01</p>
+          <h3>Audit</h3>
+          <p>Map one painful workflow end to end. Short plan for the next 2–3 automations — not a giant deck.</p>
+          <p class="price"><strong>$500–$1,000</strong><br><span>fixed, one workflow · about one week</span></p>
+        </article>
+        <article class="offer-card offer-card-featured">
+          <p class="offer-number">02</p>
+          <h3>Build</h3>
+          <p>One focused automation across GitHub, Slack, email, or tools you already use. Human approval + documented fallback.</p>
+          <p class="price"><strong>$2,500+</strong><br><span>quoted after audit</span></p>
+        </article>
+        <article class="offer-card">
+          <p class="offer-number">03</p>
+          <h3>Retainer</h3>
+          <p>Monitoring, small changes, backlog — after a build is live.</p>
+          <p class="price"><strong>Quoted after build</strong><br><span>optional</span></p>
+        </article>
+      </div>
+      <p class="fine-print">Exact scope is agreed before work starts. No guaranteed income or ROI claims — just a concrete workflow, a clear baseline, and a useful deliverable. Fixture demos below are walkthroughs, not client case studies.</p>
+    </section>
+
+    <section class="section demo-section" id="demos">
+      <div class="wrap">
+        <p class="eyebrow">Live demos</p>
+        <h2>See the patterns in about a minute each.</h2>
+        <p class="section-copy" style="max-width:640px;margin-top:20px">Fixture walkthroughs only — sample data, human approval kept explicit. No invented client metrics.</p>
+        <div class="demo-cards">
+          <article class="demo-card">
+            <h3>Release digest</h3>
+            <p>GitHub release tag → Features / Fixes / Chores digest for Slack.</p>
+            <a href="https://saasops05.github.io/saasops-digest-demo/demo.html">Open demo.html ↗</a>
+          </article>
+          <article class="demo-card">
+            <h3>Support triage</h3>
+            <p>Inbound mail/Slack → classify → GitHub issue draft → Slack approve / edit / reject.</p>
+            <a href="https://saasops05.github.io/saasops-digest-demo/demo-triage.html">Open demo-triage.html ↗</a>
+          </article>
+          <article class="demo-card">
+            <h3>Reply drafts</h3>
+            <p>Inbound email → founder-voice draft with guardrails — nothing auto-sends.</p>
+            <a href="https://saasops05.github.io/saasops-digest-demo/demo-reply.html">Open demo-reply.html ↗</a>
+          </article>
+        </div>
+        <div class="score-band" id="scorecard">
+          <div>
+            <p class="eyebrow" style="margin-bottom:10px">Lead magnet</p>
+            <h3 style="font-size:1.6rem;margin-bottom:10px">AI Ops Readiness Scorecard</h3>
+            <p>Ten yes/no questions across GitHub, Slack, and inbox handoffs. Get a score band and what to fix first.</p>
+          </div>
+          <a class="button" href="https://saasops05.github.io/saasops-digest-demo/scorecard.html">Take the scorecard <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section cta-section">
+      <div class="wrap cta">
+        <p class="eyebrow">Start small</p>
+        <h2>Bring one recurring annoyance.</h2>
+        <p>I’ll ask a few questions and tell you whether an audit, a small build, or no project is the right answer.</p>
+        <a class="button button-dark" href="mailto:saasops@agentmail.to?subject=SaaS%20Ops%20Tune-Up">Email saasops@agentmail.to <span aria-hidden="true">→</span></a>
+        <p class="microcopy">Sample audit report on request · Demos are fixtures, not client case studies</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer wrap">
+    <div class="footer-stack">
+      <span><strong>SaaS Ops Tune-Up</strong></span>
+      <span class="footer-addr">9825 Marina Blvd, Ste 100, Boca Raton, FL 33428</span>
+      <span><a href="mailto:saasops@agentmail.to">saasops@agentmail.to</a></span>
+    </div>
+    <span>AI/ops for founder-led SaaS handoffs.</span>
+  </footer>
+</body>
+</html>
